@@ -1,13 +1,17 @@
-import React from "react";
+// mui
+import { Stack } from "@mui/material";
+// rrd
 import { Outlet } from "react-router-dom";
+// component
+import SideBar from "./SideBar";
 
 const DashboardLayout = () => {
-
   return (
-    <>
-      Dashboard Layout
+    <Stack direction={"row"}>
+      {/* SideBar */}
+      <SideBar />
       <Outlet />
-    </>
+    </Stack>
   );
 };
 

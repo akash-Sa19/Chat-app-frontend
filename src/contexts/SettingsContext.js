@@ -203,6 +203,6 @@ const SettingsProvider = ({ children }) => {
   );
 };
 
-export {SettingsContext};
+export { SettingsContext };
 
 export default SettingsProvider;
