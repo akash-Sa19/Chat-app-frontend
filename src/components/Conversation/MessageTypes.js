@@ -17,9 +17,9 @@ import { Message_options } from "../../data";
 // react
 import { useState } from "react";
 
-const Timeline = ({ el }) => {
+const Timeline = ({ el, menu }) => {
   const theme = useTheme();
-  return (
+  return menu ? (
     <Stack
       direction={"row"}
       alignItems={"center"}
@@ -35,10 +35,10 @@ const Timeline = ({ el }) => {
       </Typography>
       <Divider width="46%" />
     </Stack>
-  );
+  ) : null;
 };
 
-const TextMsg = ({ el }) => {
+const TextMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack
@@ -64,12 +64,12 @@ const TextMsg = ({ el }) => {
         </Typography>
       </Box>
       {/* message option  */}
-      <MessageOptions />
+      {menu && <MessageOptions />}
     </Stack>
   );
 };
 
-const MediaMsg = ({ el }) => {
+const MediaMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack
@@ -101,12 +101,12 @@ const MediaMsg = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
-      <MessageOptions />
+      {menu && <MessageOptions />}
     </Stack>
   );
 };
 
-const ReplyMsg = ({ el }) => {
+const ReplyMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack
@@ -149,12 +149,12 @@ const ReplyMsg = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
-      <MessageOptions />
+      {menu && <MessageOptions />}
     </Stack>
   );
 };
 
-const LinkMsg = ({ el }) => {
+const LinkMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack
@@ -209,12 +209,12 @@ const LinkMsg = ({ el }) => {
           </Stack>
         </Stack>
       </Box>
-      <MessageOptions />
+      {menu && <MessageOptions />}
     </Stack>
   );
 };
 
-const DocMsg = ({ el }) => {
+const DocMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack
@@ -257,7 +257,7 @@ const DocMsg = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
-      <MessageOptions />
+      {menu && <MessageOptions />}
     </Stack>
   );
 };
