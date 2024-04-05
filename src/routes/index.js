@@ -35,7 +35,7 @@ export default function Router() {
         },
         { path: "app", element: <GeneralApp /> },
         { path: "settings", element: <Settings /> },
-        // { path: "group", element: <GroupPage /> },
+        { path: "group", element: <GroupPage /> },
 
         { path: "404", element: <Page404 /> },
         {
@@ -87,7 +87,7 @@ const GeneralApp = Loadable(
   lazy(() => import("../pages/dashboard/GeneralApp"))
 );
 const Settings = Loadable(lazy(() => import("../pages/dashboard/Settings")));
-// const GroupPage = Loadable(lazy(() => import("../pages/dashboard/Group")));
+const GroupPage = Loadable(lazy(() => import("../pages/dashboard/Group")));
 
 // auth pages
 const LoginPage = Loadable(lazy(() => import("../pages/auth/Login")));

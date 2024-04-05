@@ -77,4 +77,12 @@ export default function Scrollbar({ children, sx, ...other }) {
   );
 }
 
+// const SimpleBarStyle = styled(Box)(() => ({
+//   overflow: "auto",
+//   scrollbarWidth: "none", // Hide the scrollbar for Firefox
+//   "&::-webkit-scrollbar": {
+//     display: "none", // Hide the scrollbar for WebKit browsers (Chrome, Safari, Edge, etc.)
+//   },
+// }));
+
 export { SimpleBarStyle };
