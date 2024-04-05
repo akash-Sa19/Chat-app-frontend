@@ -19,6 +19,8 @@ import {
 } from "../../components/Search";
 import { ChatList } from "../../data";
 import ChatElement from "../../components/ChatElement";
+import CreateGroup from "../../sections/main/CreateGroup";
+import { useState } from "react";
 
 const ScrollingElement = styled(Box)(({ theme }) => ({
   overflow: "auto",
@@ -30,6 +32,11 @@ const ScrollingElement = styled(Box)(({ theme }) => ({
 
 const Group = () => {
   const theme = useTheme();
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
 
   return (
     <>
@@ -80,7 +87,11 @@ const Group = () => {
               >
                 Create New Group
               </Typography>
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  setOpenDialog(true);
+                }}
+              >
                 <Plus style={{ color: theme.palette.primary.main }} />
               </IconButton>
             </Stack>
@@ -124,6 +135,12 @@ const Group = () => {
         {/* right */}
         {/* todo +> reuse Conversation components */}
       </Stack>
+      {openDialog && (
+        <CreateGroup
+          open={openDialog}
+          handleClose={handleCloseDialog}
+        />
+      )}
     </>
   );
 };
