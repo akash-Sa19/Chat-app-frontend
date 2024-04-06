@@ -22,7 +22,7 @@ import ChatElement from "../../components/ChatElement";
 import CreateGroup from "../../sections/main/CreateGroup";
 import { useState } from "react";
 
-const ScrollingElement = styled(Box)(({ theme }) => ({
+const ScrollingElement = styled(Box)(() => ({
   overflow: "auto",
   scrollbarWidth: "none", // Hide the scrollbar for Firefox
   "&::-webkit-scrollbar": {
@@ -98,6 +98,7 @@ const Group = () => {
 
             <Divider />
 
+            {/* Chat List */}
             <ScrollingElement>
               <Stack
                 spacing={2.4}

@@ -107,8 +107,9 @@ const CreateGroup = ({ open, handleClose }) => {
       maxWidth="xs"
       open={open}
       TransitionComponent={Transition}
-      //   keep mounted will keep the dialog box open evenr if we click outside the dialog box
       keepMounted
+      //   onClose will dialog box close when we click outside the dialog box
+      //  we only have to pass a function that closes the dialog box
       onClose={handleClose}
       aria-describedby="alert-dialog-slide-description"
       sx={{ p: 4 }}
