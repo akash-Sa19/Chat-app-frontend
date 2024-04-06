@@ -20,6 +20,8 @@ import { Nav_Buttons, Profile_Menu } from "../../data";
 import { faker } from "@faker-js/faker";
 // cutom hooks
 import useSettings from "../../hooks/useSettings";
+// rrd
+import { useNavigate } from "react-router-dom";
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 40,
@@ -67,11 +69,14 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 
 const SideBar = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
   const [selected, setSelected] = useState(0);
   const { onToggleMode } = useSettings();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -147,6 +152,7 @@ const SideBar = () => {
                   key={el.index}
                   onClick={() => {
                     setSelected(el.index);
+                    navigate(el.path);
                   }}
                   sx={{ width: "max-content", color: "#000" }}
                 >
@@ -169,7 +175,10 @@ const SideBar = () => {
               </Box>
             ) : (
               <IconButton
-                onClick={() => setSelected(3)}
+                onClick={() => {
+                  setSelected(3);
+                  navigate("/settings");
+                }}
                 sx={{
                   width: "max-content",
                   color:
@@ -225,8 +234,15 @@ const SideBar = () => {
               px={1}
             >
               {Profile_Menu.map((el) => (
-                <MenuItem onClick={handleClick}>
+                <MenuItem
+                  onClick={() => {
+                    handleClick();
+                  }}
+                >
                   <Stack
+                    onClick={() => {
+                      navigate(el.path);
+                    }}
                     sx={{ width: 100 }}
                     direction="row"
                     alignItems="center"

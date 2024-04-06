@@ -1,0 +1,6 @@
+{
+  "material-ui-snippets.importPaths": "second level",
+  "emmet.useInlineCompletions": true,
+  "emmet.showSuggestionsAsSnippets": true,
+  "mui-snippets.importPaths": "second level"
+}

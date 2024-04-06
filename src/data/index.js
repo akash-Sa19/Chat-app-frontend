@@ -13,14 +13,17 @@ const Profile_Menu = [
   {
     title: "Profile",
     icon: <User />,
+    path: "/profile",
   },
   {
     title: "Settings",
     icon: <Gear />,
+    path: "/settings",
   },
   {
     title: "Logout",
     icon: <SignOut />,
+    path: "/settings",
   },
 ];
 
@@ -28,14 +31,17 @@ const Nav_Buttons = [
   {
     index: 0,
     icon: <ChatCircleDots />,
+    path: "/app",
   },
   {
     index: 1,
     icon: <Users />,
+    path: "/group",
   },
   {
     index: 2,
     icon: <Phone />,
+    path: "/call",
   },
 ];
 
