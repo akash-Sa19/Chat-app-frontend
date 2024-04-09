@@ -106,7 +106,7 @@ const ProfileForm = () => {
             variant="outlined"
             type="submit"
             color="primary"
-            size="large"
+            size="medium"
           >
             Save
           </Button>
