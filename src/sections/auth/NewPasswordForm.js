@@ -4,7 +4,7 @@ import { useState } from "react";
 import FormProvider from "../../hook-form/FormProvider";
 import { useForm } from "react-hook-form";
 // rrd
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useSearchParams } from "react-router-dom";
 // schema builder
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,27 +14,34 @@ import {
   Button,
   IconButton,
   InputAdornment,
-  Link,
   Stack,
+  Link,
 } from "@mui/material";
 import RHFTextField from "../../hook-form/RHFTextField";
 // icons
 import { Eye, EyeSlash } from "phosphor-react";
+// redux
+import { useDispatch } from "react-redux";
+import { NewPassword } from "../../redux/slices/auth";
+
+// ----------------------------------------------
 
 const NewPasswordForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+  const [queryParameters] = useSearchParams();
 
   const NewPasswordSchema = Yup.object().shape({
-    newPassword: Yup.string()
+    password: Yup.string()
       .min(6, "Password must be at least 6 characters long")
       .required("Password is required"),
     confirmPassword: Yup.string()
       .required("Password is required")
-      .oneOf([Yup.ref("newPassword"), null], "Password must match"),
+      .oneOf([Yup.ref("password"), null], "Password must match"),
   });
 
   const defaultValues = {
-    newPassword: "",
+    password: "",
     confirmPassword: "",
   };
 
@@ -50,17 +57,19 @@ const NewPasswordForm = () => {
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = methods;
 
-  const onSubmit = async (data) => {};
-  try {
-    // submit
-  } catch (error) {
-    console.log(error);
-    reset();
-    setError("afterSubmit", {
-      ...error,
-      message: error.message,
-    });
-  }
+  const onSubmit = async (data) => {
+    try {
+      // submit
+      dispatch(NewPassword({ ...data, token: queryParameters.get("token") }));
+    } catch (error) {
+      console.log(error);
+      reset();
+      setError("afterSubmit", {
+        ...error,
+        message: error.message,
+      });
+    }
+  };
 
   return (
     <div>
@@ -74,7 +83,7 @@ const NewPasswordForm = () => {
           )}
 
           <RHFTextField
-            name={"newPassword"}
+            name={"password"}
             label="New Password"
             type={showPassword ? "text" : "password"}
             InputProps={{

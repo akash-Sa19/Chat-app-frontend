@@ -13,7 +13,7 @@ This project is a modern chat application built with the aim of providing users 
 
 ## Installation
 
-1. Clone the repository to your local machine using `git clone https://github.com/akash-Sa19/Chat-app-backend.git`.
+1. Clone the repository to your local machine using `git clone https://github.com/akash-Sa19/Chat-app-frontend.git`.
 2. Navigate to the project directory.
 3. Install the necessary dependencies by running `npm install`.
 4. Start the development server with `npm start`.

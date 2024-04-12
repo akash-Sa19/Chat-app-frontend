@@ -20,8 +20,15 @@ import {
 import RHFTextField from "../../hook-form/RHFTextField";
 // icons
 import { Eye, EyeSlash } from "phosphor-react";
+// redux
+import { useDispatch } from "react-redux";
+// auth funtions
+import { LoginUser } from "../../redux/slices/auth";
+
+// --------------------------------------------------
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
@@ -48,17 +55,19 @@ const LoginForm = () => {
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = methods;
 
-  const onSubmit = async (data) => {};
-  try {
-    // submit
-  } catch (error) {
-    console.log(error);
-    reset();
-    setError("afterSubmit", {
-      ...error,
-      message: error.message,
-    });
-  }
+  const onSubmit = async (data) => {
+    try {
+      // submit
+      dispatch(LoginUser(data));
+    } catch (error) {
+      console.log(error);
+      reset();
+      setError("afterSubmit", {
+        ...error,
+        message: error.message,
+      });
+    }
+  };
 
   return (
     <div>

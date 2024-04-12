@@ -1,0 +1,13 @@
+task -1
+reset-password -> fontend
+forgot-password -> backend
+
+task -2
+new-password -> fontend
+reset-password -> backend
+
+task -3
+In resetPassword token both password and confirmPassword EYE is opening and closing at the same time
+
+task -4 
+after resting the password we are directly send to "/app", i think we must give user chance to login first

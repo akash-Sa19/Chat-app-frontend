@@ -22,6 +22,9 @@ import { faker } from "@faker-js/faker";
 import useSettings from "../../hooks/useSettings";
 // rrd
 import { useNavigate } from "react-router-dom";
+// redux
+import { LogoutUser } from "../../redux/slices/auth";
+import { useDispatch } from "react-redux";
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 40,
@@ -70,6 +73,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 const SideBar = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [selected, setSelected] = useState(0);
   const { onToggleMode } = useSettings();
@@ -241,8 +245,12 @@ const SideBar = () => {
                 >
                   <Stack
                     onClick={() => {
+                      if (el.id === 3) {
+                        dispatch(LogoutUser());
+                      }
                       navigate(el.path);
                     }}
+                    key={el.id}
                     sx={{ width: 100 }}
                     direction="row"
                     alignItems="center"
