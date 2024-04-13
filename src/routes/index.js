@@ -71,6 +71,10 @@ export default function Router() {
           element: <NewPasswordPage />,
           path: "new-password",
         },
+        {
+          element: <VerifyPage />,
+          path: "verify",
+        },
       ],
     },
     {
@@ -102,5 +106,6 @@ const ResetPasswordPage = Loadable(
 const NewPasswordPage = Loadable(
   lazy(() => import("../pages/auth/NewPassword"))
 );
+const VerifyPage = Loadable(lazy(() => import("../pages/auth/Verify")));
 // 404 page
 const Page404 = Loadable(lazy(() => import("../pages/Page404")));

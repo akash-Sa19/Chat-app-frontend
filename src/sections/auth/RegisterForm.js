@@ -1,13 +1,3 @@
-// react
-import { useState } from "react";
-// form component
-import FormProvider from "../../hook-form/FormProvider";
-import RHFTextField from "../../hook-form/RHFTextField";
-// rhf
-import { useForm } from "react-hook-form";
-// schema builder
-import * as Yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 // mui
 import {
   Alert,
@@ -18,10 +8,27 @@ import {
   Stack,
 } from "@mui/material";
 // icons
+// react
+import { useState } from "react";
+// form component
+import FormProvider from "../../hook-form/FormProvider";
+import RHFTextField from "../../hook-form/RHFTextField";
+// rhf
+import { useForm } from "react-hook-form";
+// schema builder
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import { Eye, EyeSlash } from "phosphor-react";
+// redux
+import { useDispatch } from "react-redux";
+import { RegisterUser } from "../../redux/slices/auth";
+
+// -----------------------------------------------------
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().required("Firstname is required"),
@@ -35,8 +42,8 @@ const RegisterForm = () => {
   const defaultValues = {
     firstName: "",
     lastName: "",
-    email: "demo@tawk.com",
-    password: "demo1234",
+    email: "@rice.com",
+    password: "1234",
   };
 
   const methods = useForm({
@@ -48,20 +55,22 @@ const RegisterForm = () => {
     reset,
     setError,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors },
   } = methods;
 
-  const onSubmit = async (data) => {};
-  try {
-    // submit
-  } catch (error) {
-    console.log(error);
-    reset();
-    setError("afterSubmit", {
-      ...error,
-      message: error.message,
-    });
-  }
+  const onSubmit = async (data) => {
+    try {
+      // submit
+      dispatch(RegisterUser(data));
+    } catch (error) {
+      console.log(error);
+      reset();
+      setError("afterSubmit", {
+        ...error,
+        message: error.message,
+      });
+    }
+  };
 
   return (
     <>
@@ -121,7 +130,7 @@ const RegisterForm = () => {
               width: "100%",
             }}
           >
-            Login
+            Create Account
           </Button>
         </Stack>
       </FormProvider>

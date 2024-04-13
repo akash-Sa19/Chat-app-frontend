@@ -39,8 +39,8 @@ const LoginForm = () => {
   });
 
   const defaultValues = {
-    email: "demo@tawk.com",
-    password: "demo1234",
+    email: "",
+    password: "1234",
   };
 
   const methods = useForm({

@@ -133,6 +133,7 @@ const SideBar = () => {
             {Nav_Buttons.map((el) =>
               el.index === selected ? (
                 <Box
+                  key={el.index}
                   sx={{
                     backgroundColor: theme.palette.primary.main,
                     borderRadius: 1.5,
@@ -239,6 +240,7 @@ const SideBar = () => {
             >
               {Profile_Menu.map((el) => (
                 <MenuItem
+                  key={el.id}
                   onClick={() => {
                     handleClick();
                   }}
