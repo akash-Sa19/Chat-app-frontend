@@ -1,12 +1,20 @@
-import { Dialog, DialogContent, Stack, Tab, Tabs } from "@mui/material";
+// react
 import { useEffect, useState } from "react";
+// mui
+import { Dialog, DialogContent, Stack, Tab, Tabs } from "@mui/material";
+// redux
 import { useDispatch, useSelector } from "react-redux";
 import {
   FetchFriends,
   FetchFriendsRequests,
   FetchUser,
 } from "../../redux/slices/app";
+// compoenent
+import { FriendListComponent, UserComponent } from "../../components/Friends";
 
+// -------------------------------------------------------------------------------
+
+// subComponent
 const UsersList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -19,7 +27,12 @@ const UsersList = () => {
     <>
       {users.map((el, idx) => {
         // TODO => Render the user component
-        return <></>;
+        return (
+          <UserComponent
+            key={el._id}
+            {...el}
+          />
+        );
       })}
     </>
   );
@@ -36,7 +49,12 @@ const FriendsList = () => {
     <>
       {friends.map((el, idx) => {
         // TODO => Render Friend component
-        return <></>;
+        return (
+          <FriendListComponent
+            key={el._id}
+            {...el}
+          />
+        );
       })}
     </>
   );
@@ -51,13 +69,22 @@ const FriendRequestList = () => {
   return (
     <>
       {friendRequests.map((el, idx) => {
+        // el => {_id, sender: {_id, firstname, lastName, img, online}}
         // TODO => Render the Request component
-        return <></>;
+        return (
+          <FriendRequestList
+            key={el._id}
+            {...el.sender}
+            id={el._id}
+          />
+        );
       })}
     </>
   );
 };
 
+// ----------------------------------------------------------
+// mainComponent
 export default function Friends({ open, handleClose }) {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
