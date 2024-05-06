@@ -10,7 +10,11 @@ import {
   FetchUser,
 } from "../../redux/slices/app";
 // compoenent
-import { FriendListComponent, UserComponent } from "../../components/Friends";
+import {
+  FriendListComponent,
+  UserComponent,
+  FriendRequestComponent,
+} from "../../components/Friends";
 
 // -------------------------------------------------------------------------------
 
@@ -72,7 +76,7 @@ const FriendRequestList = () => {
         // el => {_id, sender: {_id, firstname, lastName, img, online}}
         // TODO => Render the Request component
         return (
-          <FriendRequestList
+          <FriendRequestComponent
             key={el._id}
             {...el.sender}
             id={el._id}
@@ -114,17 +118,23 @@ export default function Friends({ open, handleClose }) {
             <Tab label="Requests" />
           </Tabs>
         </Stack>
+
         {/* Dialog Content */}
         <DialogContent>
           <Stack sx={{ height: "100%" }}>
             <Stack spacing={2.5}>
               {(() => {
                 switch (value) {
-                  case 0: //display all users
+                  case 0:
+                    //display all users
                     return <UsersList />;
-                  case 1: // display all friends
+
+                  case 1:
+                    // display all friends
                     return <FriendsList />;
-                  case 2: // display all friends request
+
+                  case 2:
+                    // display all friends request
                     return <FriendRequestList />;
                 }
               })()}

@@ -67,7 +67,7 @@ const StyledInput = styled(TextField)(({ theme }) => ({
 }));
 
 const ChatInput = ({ setOpenPicker }) => {
-  const [openAcion, setOpenAction] = useState(false);
+  const [openAction, setOpenAction] = useState(false);
 
   return (
     <StyledInput
@@ -81,20 +81,25 @@ const ChatInput = ({ setOpenPicker }) => {
             <Stack
               sx={{
                 position: "relative",
-                display: openAcion ? "inline-block" : "none",
+                display: openAction ? "inline-block" : "none",
               }}
             >
               {Actions.map((el) => (
                 <Tooltip
                   title={el.title}
                   placement="right"
+                  key={el.y}
                 >
                   <Fab
+                    onClick={() => {
+                      setOpenAction(!openAction);
+                    }}
                     sx={{
                       position: "absolute",
                       top: -el.y,
                       backgroundColor: el.color,
                     }}
+                    aria-label="add"
                   >
                     {el.icon}
                   </Fab>

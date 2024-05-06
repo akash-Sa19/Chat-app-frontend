@@ -96,7 +96,7 @@ export function closeSnakbar() {
 export function FetchUser() {
   return async (dispatch, getState) => {
     await axios
-      .get("/users/get-users", {
+      .get("http://localhost:3003/user/get-users", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getState().auth.token}`,
@@ -115,7 +115,7 @@ export function FetchUser() {
 export function FetchFriends() {
   return async (dispatch, getState) => {
     await axios
-      .get("/users/get-friends", {
+      .get("http://localhost:3003/user/get-friends", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getState().auth.token}`,
@@ -134,7 +134,7 @@ export function FetchFriends() {
 export function FetchFriendsRequests() {
   return async (dispatch, getState) => {
     await axios
-      .get("/users/get-friend-requests", {
+      .get("http://localhost:3003/user/get-friend-requests", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getState().auth.token}`,

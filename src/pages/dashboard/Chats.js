@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // mui
 import {
   Box,
@@ -22,19 +22,23 @@ import {
   MagnifyingGlass,
   Users,
 } from "phosphor-react";
-
 // constants
 import { ChatList } from "../../data";
-
+// socket.io
+import { socket } from "../../socket";
 // other
 import { SimpleBarStyle } from "../../components/Scrollbar";
 // components
 import ChatElement from "../../components/ChatElement";
 import Friends from "../../sections/main/Friends";
+// redux
+import { useSelector } from "react-redux";
+
+// ----------------------------------------------------------------
 
 const Chats = () => {
+  // for Front-end
   const theme = useTheme();
-
   const [openDialog, setOpenDialog] = useState(false);
   const handleOpenDialog = () => {
     setOpenDialog(true);
@@ -42,6 +46,19 @@ const Chats = () => {
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
+
+  // for Back-end
+  const { conversations } = useSelector(
+    (state) => state.conversation.direct_chat
+  );
+  console.log(conversations);
+
+  const user_id = window.localStorage.getItem("user_id");
+  useEffect(() => {
+    socket.emit("get_direct_conversations", { user_id }, (data) => {
+      // data => list of conversations
+    });
+  }, []);
 
   return (
     <>
@@ -130,14 +147,16 @@ const Chats = () => {
                 >
                   Pinned
                 </Typography>
-                {ChatList.filter((el) => el.pinned).map((el) => {
-                  return (
-                    <ChatElement
-                      {...el}
-                      key={el.id}
-                    />
-                  );
-                })}
+                {conversations
+                  .filter((el) => el.pinned)
+                  .map((el) => {
+                    return (
+                      <ChatElement
+                        {...el}
+                        key={el.id}
+                      />
+                    );
+                  })}
               </Stack>
               <Stack spacing={2.4}>
                 <Typography
@@ -147,9 +166,16 @@ const Chats = () => {
                 >
                   All Chats
                 </Typography>
-                {ChatList.filter((el) => !el.pinned).map((el) => {
-                  return <ChatElement {...el} />;
-                })}
+                {conversations
+                  .filter((el) => !el.pinned)
+                  .map((el) => {
+                    return (
+                      <ChatElement
+                        {...el}
+                        key={el.id}
+                      />
+                    );
+                  })}
               </Stack>
             </SimpleBarStyle>
           </Stack>
