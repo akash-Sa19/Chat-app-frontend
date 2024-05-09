@@ -32,7 +32,8 @@ import { SimpleBarStyle } from "../../components/Scrollbar";
 import ChatElement from "../../components/ChatElement";
 import Friends from "../../sections/main/Friends";
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { FetchDirectConversation } from "../../redux/slices/conversation";
 
 // ----------------------------------------------------------------
 
@@ -48,17 +49,21 @@ const Chats = () => {
   };
 
   // for Back-end
-  const { conversations } = useSelector(
-    (state) => state.conversation.direct_chat
-  );
-  console.log(conversations);
-
+  const dispatch = useDispatch();
   const user_id = window.localStorage.getItem("user_id");
   useEffect(() => {
     socket.emit("get_direct_conversations", { user_id }, (data) => {
+      console.log("pages/dashboard/chats/line59 -> ", data);
       // data => list of conversations
+      // console.log(data);
+      dispatch(FetchDirectConversation({ conversations: data }));
     });
   }, []);
+
+  const { conversations } = useSelector(
+    (state) => state.conversation.direct_chat
+  );
+  // console.log(conversations);
 
   return (
     <>
